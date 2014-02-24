@@ -1,5 +1,0 @@
-task :hello do
-  on roles(:app) do
-    execute :uptime
-  end
-end

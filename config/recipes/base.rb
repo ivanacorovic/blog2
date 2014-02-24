@@ -1,10 +1,10 @@
 def template(from, to)
   erb= File.read(File.expand_path("../templates/#{from}", __FILE__))
-  upload! ERB.new(erb).result(binding), to
+  upload! StringIO.new(ERB.new(erb).result(binding)), to
 end
 
 def set_default(name, value)
-	if !(fetch(name)) 
+	if !fetch(name, false) 
 		set(name, value)
 	end
 end
