@@ -1,11 +1,10 @@
-
 namespace :deploy do
-	task :install do
-		on roles (:all) do
-			execute :sudo, "apt-get", "-y", "update"
-			execute :sudo, "apt-get", "-y", "install", "python-software-properties"
-		end
-	end
+  task :install do
+    on roles(:all) do
+      execute :sudo, "apt-get", "-y", "update"
+      execute :sudo, "apt-get", "-y", "install", "python-software-properties"
+    end
+  end
 
   task :setup_config do
     on roles(:app) do
@@ -21,16 +20,16 @@ namespace :deploy do
       # set in the stage files
       config_files = fetch(:config_files)
       config_files.each do |file|
-        smart_template file
+      smart_template file
       end
 
-      # # which of the above files should be marked as executable
+      # which of the above files should be marked as executable
       # executable_files = fetch(:executable_config_files)
       # executable_files.each do |file|
       #   execute :chmod, "+x #{shared_path}/config/#{file}"
       # end
 
-      # # symlink stuff which should be... symlinked
+      # symlink stuff which should be... symlinked
       # symlinks = fetch(:symlinks)
 
       # symlinks.each do |symlink|
