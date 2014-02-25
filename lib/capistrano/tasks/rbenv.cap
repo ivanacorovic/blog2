@@ -1,5 +1,5 @@
-set_default(:ruby_version, "2.1.0")
-set_default(:rbenv_bootstrap, "bootstrap-ubuntu-12-04")
+
+
 
 namespace :rbenv do
   desc "Install rbenv, Ruby, and the Bundler gem"
@@ -14,8 +14,8 @@ namespace :rbenv do
       # execute %q{export PATH="$HOME/.rbenv/bin:$PATH"}
       # execute %q{eval "$(rbenv init -)"}
       execute "rbenv #{fetch(:rbenv_bootstrap)}"
-      execute "rbenv install #{fetch(:ruby_version)}"
-      execute "rbenv global #{fetch(:ruby_version)}"
+      execute "rbenv install #{fetch(:rbenv_ruby)}"
+      execute "rbenv global #{fetch(:rbenv_ruby)}"
       execute "gem install bundler --no-ri --no-rdoc"
       execute "rbenv rehash"
     end

@@ -9,13 +9,13 @@ namespace :nginx do
 	after "deploy:install", "nginx:install"
 	task :setup  do
 		on roles(:web) do
-			template "nginx_unicorn.erb", "/tmp/nginx_conf"
-			execute :sudo, "mv", "/tmp/nginx_conf", "/etc/nginx/sites-enabled/#{fetch(:application)}"
+			smart_template "nginx_unicorn", "/tmp/nginx_conf"
+			execute :sudo, "mv", "/tmp/nginx_conf", "#{shared_path}/nginx_unicorn/sites-enabled/#{fetch(:full_app_name)}"
 			execute :sudo, "rm", "-f", "/etc/nginx/sites-enabled/default"
 		end
 	end
 
-	after "deploy:finishing", "nginx:setup"
+	after "deploy:setup_config", "nginx:setup"
 
   [:restart, :stop, :start].each  do |command|
     desc 'Restart application'
